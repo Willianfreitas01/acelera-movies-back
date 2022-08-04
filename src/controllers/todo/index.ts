@@ -11,13 +11,13 @@ export const getTODO = (request, response) => {
   return response.json({ todos: [] })
 }
 export const postMovies = async (request, response) => {
-  const movieRepository = getRepository(Movie)
-  const movieEntitySaved = await movieRepository.save(request.body)
-  return response.json(movieEntitySaved)
+  const postRepository = getRepository(Movie)
+  const postSaved = await postRepository.save(request.body)
+  return response.json(postSaved)
 }
 export const getMovies = async (request, response) => {
-  const movieRepo = getRepository(Movie)
-  const moviesFind = await movieRepo.find()
+  const getMovieRepository = getRepository(Movie)
+  const moviesFind = await getMovieRepository.find()
   return response.json(moviesFind)
 }
 
@@ -28,8 +28,8 @@ export const getLogin = async (request, response) => {
 }
 
 export const getMoviesId = async (request, response) => {
-  const movieRepo = getRepository(Movie)
-  const moviesFind = await movieRepo.findOne(request.params.id)
+  const getIdRepository = getRepository(Movie)
+  const moviesFind = await getIdRepository.findOne(request.params.id)
   return response.json(moviesFind)
 }
 
