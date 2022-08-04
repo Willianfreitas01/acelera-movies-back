@@ -12,7 +12,7 @@ export class Movie {
   id: number
 
   @Column({ name: "title", type: "varchar" })
-  name: String
+  title: String
 
   @Column({ name: "gender", type: "varchar" })
   gender: String

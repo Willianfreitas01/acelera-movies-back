@@ -1,8 +1,8 @@
 import { response } from "express"
 import { request } from "http"
-import { getRepository } from "typeorm"
+import { getRepository, getTreeRepository } from "typeorm"
 import { Movie } from "@models/entity/ToDo"
-import { Login } from "@models/entity/login"
+import { Login } from "@models/entity/Login"
 
 export const itsWorks = (request, response) => {
   return response.json({ message: "It's Works!!" })
@@ -34,7 +34,13 @@ export const getMoviesId = async (request, response) => {
 }
 
 export const deleteMovies = async (request, response) => {
-  const pullMovies = getRepository(Movie)
-  const moviesDelete = await pullMovies.delete(request.body)
+  const deleteRepository = getRepository(Movie)
+  const moviesDelete = await deleteRepository.delete(request.params.id)
   return response.json(moviesDelete)
+}
+
+export const putMovies = async (request, response) => {
+  const putRepository = getRepository(Movie)
+  const editMovie = await putRepository.update(request.params.id, request.body)
+  return response.json(editMovie)
 }
