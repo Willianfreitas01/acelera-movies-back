@@ -7,8 +7,8 @@ import {
   itsWorks,
   postMovies,
   putMovies,
+  createUser,
 } from "@controllers/todo"
-import { getRepository } from "typeorm"
 export const defineRoutes = (app) => {
   app.get("/", itsWorks)
   app.get("/todo", getTODO)
@@ -18,4 +18,5 @@ export const defineRoutes = (app) => {
   app.post("/movies", postMovies)
   app.delete("/movies/:id", deleteMovies)
   app.put("/movies/:id", putMovies)
+  app.post("/user", createUser)
 }

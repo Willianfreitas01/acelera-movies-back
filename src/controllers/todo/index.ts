@@ -2,7 +2,8 @@ import { response } from "express"
 import { request } from "http"
 import { getRepository, getTreeRepository } from "typeorm"
 import { Movie } from "@models/entity/ToDo"
-import { Login } from "@models/entity/Login"
+import { Login } from "@models/entity/login"
+import { User } from "@models/entity/user"
 
 export const itsWorks = (request, response) => {
   return response.json({ message: "It's Works!!" })
@@ -20,11 +21,18 @@ export const getMovies = async (request, response) => {
   const moviesFind = await getMovieRepository.find()
   return response.json(moviesFind)
 }
-
-export const getLogin = async (request, response) => {
-  const loginRepository = getRepository(Login)
-  const login = await loginRepository.find()
-  return response.json(login)
+export const getLogin = (request, response) => {
+  const { login, password } = request.body
+  if (login === "will@gmail.com" && password === "12345") {
+    return response.status(200).json({
+      auth: true,
+      message: "sucesso",
+    })
+  }
+  return response.status(401).json({
+    auth: false,
+    message: "falha",
+  })
 }
 
 export const getMoviesId = async (request, response) => {
@@ -43,4 +51,10 @@ export const putMovies = async (request, response) => {
   const putRepository = getRepository(Movie)
   const editMovie = await putRepository.update(request.params.id, request.body)
   return response.json(editMovie)
+}
+
+export const createUser = async (request, response) => {
+  const userRepository = getRepository(User)
+  const user = await userRepository.save(request.body)
+  return response.json(user)
 }
